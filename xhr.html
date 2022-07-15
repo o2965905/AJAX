@@ -37,6 +37,7 @@
 
     //宣告一個XMLHttpRequest物件
     let xhr=new XMLHttpRequest;
+    //xhr只是個變數，可取別的，但改了下面變數也要跟著改名稱
 
     //建立請求的各項設定及實質內容
     xhr.open(
@@ -68,6 +69,6 @@
 
     
     //送出請求
-    xhr.send();
+    xhr.send();//如果是用post就要寫成xhr.send(context);
 
     </script>
