@@ -70,10 +70,11 @@
                         <div class="card" style="width: 18rem;">
                             <img src="https://picsum.photos/id/112/200/200" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title text-success">${entrys[i].title}</h5>
+                                <h5 class="card-title text-success text-truncate">${entrys[i].title}</h5>
                                 <hr>
-                                <p class="card-text text-danger">${entrys[i].author.name}</p>    
-                                <p class="card-text text-secondary">${entrys[i].summary}</p>    
+                                <p class="card-text text-danger text-truncate">${entrys[i].author.name}</p>    
+                                <p class="card-text text-secondary text-truncate">${entrys[i].summary}</p>
+                                <button type="button" class="btn btn-info">延伸閱讀</button>    
                             </div>
                         </div>
                     </li>`;
