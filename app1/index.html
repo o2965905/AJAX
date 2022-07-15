@@ -41,13 +41,23 @@
 </html>
 <script>
 //建立一個函式loadpage(page)用來載入內容至content區塊中
-loadpage('results/main.html'); //使網頁一開始就被載入內容
+/*------------------------------------------------------------------*/ 
+// ﹝方法一﹞
 
-function loadpage(page){
-  $.get(page,function(res){
-    // console.log(res);
-    $(".content").html(res);
-  });
+// loadpage('results/main.html'); //使網頁一開始就被載入內容
+
+// function loadpage(page){
+//     $.get(page,function(res){
+//         // console.log(res);
+//         $(".content").html(res);
+//       });
+//     }
+/*------------------------------------------------------------------*/ 
+// ﹝方法二﹞
+
+loadpage('results/main.html'); //使網頁一開始就被載入內容
+function loadpage(url){
+  $(".content").load(url);
 }
 
 
