@@ -7,6 +7,16 @@
     <title>XMLHttpRequest</title>
     <link rel="shortcut icon" href="#" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <style>
+        ul li{
+            border: 1px solid #eee;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px 1px #ccc;
+            color: steelblue;
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1 class="header">XMLHttpRequest</h1>
@@ -39,15 +49,25 @@
         let type=xhr.getResponseHeader("Content-Type");
         let status=xhr.status;
         let res=xhr.responseText;
+        // console.log(type,status,res);
 
         let data=JSON.parse(res);//解碼
 
-        // console.log(type,status,res);
-        console.log(data);
+        let title=document.querySelector(".title");
+        title.innerHTML=data.title;
+        // console.log(data);
+
+        let ul=document.querySelector('ul');
+        let li='';
+        let entrys=data.entry;
+        for(let i=0;i<entrys.length;i++){
+            li=li+`<li>${entrys[i].title}</li>`;
+        }
+        ul.innerHTML=li;
     }
 
-    xhr.send();
-
+    
     //送出請求
+    xhr.send();
 
     </script>
