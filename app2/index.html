@@ -33,9 +33,12 @@
       }
 
       .p{
-        display: inline;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         text-align: center;
       }
+
 
       .display-4{
         text-align: center;
@@ -53,6 +56,7 @@
   <!-- 新增學生資料 -->
   <div class="addForm">
     <form method="post">
+      <h3 class="text-white bg-dark">新增學員</h3>
       <p><input type="number" name="classroom" id="classroom" placeholder="請輸入班級"></p>
       <p><input type="number" name="seatnum" id="seatnum" placeholder="請輸入座號"></p>
       <p><input type="text" name="name" id="name" placeholder="請輸入姓名"></p> 
@@ -66,11 +70,23 @@
   <!-- ---------------------------------------------------------------------------------- -->
   <!-- 編輯學生資料 -->
   <div class="editForm"></div>
+  <form method="post">
+    <h3 class="text-white bg-dark">編輯學員</h3>
+    <p><input type="number" name="classroom" id="eClassroom"  value=""  placeholder="請輸入班級"></p>
+    <p><input type="number" name="seatnum" id="eSeatnum"  value=""  placeholder="請輸入座號"></p>
+    <p><input type="text" name="name" id="eName"  value=""  placeholder="請輸入姓名"></p> 
+    <p><input type="date" name="birthday" id="eBirthday" value=""  ></p>
+    <p>
+      <input type="button" value="確認編輯" onclick="update()" class="btn btn-info">
+      <input type="reset" value="清除"  class="btn btn-danger">
+    </p>
+  </form>
 
   <!-- ---------------------------------------------------------------------------------- -->
   <!-- 班級選擇 -->
+  <h3 class="text-white bg-dark">班級選擇</h3> 
   <div class="p">
-    <p>班級選擇 : 
+    
     <a href="JavaScript:query(101)" class="btn btn-outline-info">101</a>
     <a href="JavaScript:query(102)" class="btn btn-outline-info">102</a>
     <a href="JavaScript:query(103)" class="btn btn-outline-info">103</a>
@@ -81,7 +97,7 @@
     <a href="JavaScript:query(108)" class="btn btn-outline-info">108</a>
     <a href="JavaScript:query(109)" class="btn btn-outline-info">109</a>
     <a href="JavaScript:query(110)" class="btn btn-outline-info">110</a>
-    </p>
+    
     <div id="result" style="display:none;font-size: 1.25rem;"></div>
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
@@ -147,7 +163,7 @@ function query(classroom){
       `<tr class="card-body">
         <td class="text-muted">${val.name}</td>
         <td class="text-secondary">${val.birthday}</td>
-        <td><button class="btn btn-success" onclick='del(${val.id})'>編輯(${val.id})</button></td>
+        <td><button class="btn btn-success" onclick='edit(${val.id})'>編輯(${val.id})</button></td>
         <td><button class="btn btn-danger" onclick='del(${classroom},${val.id})'>刪除(${val.id})</button></td>
       </tr>`
       ;
@@ -156,6 +172,16 @@ function query(classroom){
   })
 }
 
+// 取得要修改的學生資料
+function edit(id){
+  $.get("./api/show.php",{id},(student)=>{
+    student=JSON.parse(student)
+    $("#eClassroom").val(student.classroom)
+    $("#eSeatnum").val(student.seat_num)
+    $("#eName").val(student.name)
+    $("#eBirthday").val(student.birthday)
+  })
+}
 //編輯資料的函式
 function update(){
 
