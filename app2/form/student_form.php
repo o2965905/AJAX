@@ -37,6 +37,6 @@ $type = $_POST['type'];
         <input type="reset" value="清除" class="btn btn-danger">
     </p>
     <p>
-        <input type="button" value="取消" onclick="$('#studentForm').html('')" class="btn btn-secondary">
+        <input type="button" value="取消" onclick="$('.modal-body').html('');$('#stuModal').modal('hide')" class="btn btn-secondary">
     </p>
 </form>
