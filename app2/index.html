@@ -21,7 +21,7 @@
       }
 
       table td {
-        background-color: #eee;
+        background-color:#eee;
         font-size: 1.25rem;
         padding: 5px;
       }
@@ -45,10 +45,12 @@
 </head>
 <body>
   <!-- ---------------------------------------------------------------------------------- -->
+  <!-- 標題 -->
   <div class="jumbotron">
     <h1 class="display-4">學生資料管理系統</h1>
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
+  <!-- 新增學生資料 -->
   <div class="addForm">
     <form method="post">
       <p><input type="number" name="classroom" id="classroom" placeholder="請輸入班級"></p>
@@ -62,9 +64,11 @@
     </form>
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
+  <!-- 編輯學生資料 -->
   <div class="editForm"></div>
 
   <!-- ---------------------------------------------------------------------------------- -->
+  <!-- 班級選擇 -->
   <div class="p">
     <p>班級選擇 : 
     <a href="JavaScript:query(101)" class="btn btn-outline-info">101</a>
@@ -78,12 +82,14 @@
     <a href="JavaScript:query(109)" class="btn btn-outline-info">109</a>
     <a href="JavaScript:query(110)" class="btn btn-outline-info">110</a>
     </p>
+    <div id="result" style="display:none;font-size: 1.25rem;"></div>
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
   <br>
   <hr>
   <br>
   <!-- ---------------------------------------------------------------------------------- -->
+  <!-- 班級資料內容 -->
   <div class="container">
     <div class="row">
         <h3 id="room" class="text-info"></h3>
@@ -139,8 +145,10 @@ function query(classroom){
       // console.log(idx,val)
       tr=tr+
       `<tr class="card-body">
-        <td class="text-primary">${val.name}</td>
-        <td class="text-danger">${val.birthday}</td>
+        <td class="text-muted">${val.name}</td>
+        <td class="text-secondary">${val.birthday}</td>
+        <td><button class="btn btn-success" onclick='del(${val.id})'>編輯(${val.id})</button></td>
+        <td><button class="btn btn-danger" onclick='del(${classroom},${val.id})'>刪除(${val.id})</button></td>
       </tr>`
       ;
     })
@@ -154,7 +162,22 @@ function update(){
 }
 
 //刪除資料的函式
-function del(){
+function del(classroom,id){
+
+$.post("./api/delete.php",{id},(res)=>{
+
+  if(parseInt(res)===1){
+    $("#result").css({color:'green',display:'block'}).text("刪除成功")
+  }else{
+    $("#result").css({color:'tomato',display:'block'}).text("刪除失敗")
+  }
+
+  query(classroom);
+
+  setTimeout(()=>{
+    $("#result").hide();
+  },3000);
+})
 
 }
 
