@@ -1,75 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>學生資料管理系統</title>
-    <link rel="shortcut icon" href="#" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <!-- 置入BS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <!---匯入要使用的函式庫--->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- 置入JQ & JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-    <style>
-      p{
-        padding-left: 5px;
-        font-size: 1.25rem;
-      }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>學生資料管理系統</title>
+  <link rel="shortcut icon" href="#" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <!-- 置入BS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <!---匯入要使用的函式庫--->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-      table td {
-        background-color:#eee;
-        font-size: 1.25rem;
-        padding: 5px;
-      }
+  <style>
+    p {
+      padding-left: 5px;
+      font-size: 1.25rem;
+    }
 
-      form{
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-      }
+    table td {
+      background-color: #eee;
+      font-size: 1.25rem;
+      padding: 5px;
+    }
 
-      .p{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        text-align: center;
-      }
+    form {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    form input {
+      margin: 8px 0;
+      border: 1px solid #D9D9D9;
+      border-radius: 5px;
+      padding: 8px;
+      box-sizing: border-box;
+      width: 30%;
+      background-color: #FFF;
+      font-size: 15px;
+    }
+
+    .p {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      text-align: center;
+    }
 
 
-      .display-4{
-        text-align: center;
-      }
-
-    </style>
+    .display-4 {
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
   <!-- ---------------------------------------------------------------------------------- -->
   <!-- 標題 -->
   <div class="jumbotron">
     <h1 class="display-4">學生資料管理系統</h1>
+    <hr>
+    <div style="display:flex;justify-content: center;text-align: center; ">
+      <div class="btn btn-info" onclick="loadForm('add')">新增學員</div>
+    </div>
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
   <!-- 新增學生資料 -->
-  <div class="addForm">
-    <form method="post">
-      <h3 class="text-white bg-secondary">新增學員</h3>
-      <p><input type="number" name="classroom" id="classroom" placeholder="請輸入班級"></p>
-      <p><input type="number" name="seatnum" id="seatnum" placeholder="請輸入座號"></p>
-      <p><input type="text" name="name" id="name" placeholder="請輸入姓名"></p> 
-      <p><input type="date" name="birthday" id="birthday"></p>
-      <p>
-        <input type="button" value="確認新增" onclick="create()" class="btn btn-info">
-        <input type="reset" value="清除"  class="btn btn-danger">
-      </p>
-    </form>
+  <!-- <div class="btn btn-success" onclick="loadForm('add')">新增學員</div> -->
+  <div id="studentForm">
+    <!-- Form表單改用檔案引入方式呈現 -->
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
   <!-- 編輯學生資料 -->
-  <div class="editForm"></div>
+  <!-- <div class="editForm"></div>
   <form method="post">
     <h3 class="text-white bg-secondary">編輯學員</h3>
     <p><input type="number" name="classroom" id="eClassroom"  value=""  placeholder="請輸入班級"></p>
@@ -79,15 +86,17 @@
     <p>
       <input type="hidden" name="id" id="stuId" value="">
       <input type="button" value="確認編輯" onclick="update()" class="btn btn-info">
+    </p>
+    <p>
       <input type="reset" value="清除"  class="btn btn-danger">
     </p>
-  </form>
+  </form> -->
 
   <!-- ---------------------------------------------------------------------------------- -->
   <!-- 班級選擇 -->
-  <h3 class="text-white bg-secondary" style="display: flex; justify-content: center;">班級選擇</h3> 
+  <h3 class="text-white bg-secondary" style="display: flex; justify-content: center;">班級選擇</h3>
   <div class="p">
-    
+
     <a href="JavaScript:query(101)" class="btn btn-outline-info">101</a>
     <a href="JavaScript:query(102)" class="btn btn-outline-info">102</a>
     <a href="JavaScript:query(103)" class="btn btn-outline-info">103</a>
@@ -98,7 +107,7 @@
     <a href="JavaScript:query(108)" class="btn btn-outline-info">108</a>
     <a href="JavaScript:query(109)" class="btn btn-outline-info">109</a>
     <a href="JavaScript:query(110)" class="btn btn-outline-info">110</a>
-    
+
     <div id="result" style="display:none;font-size: 1.25rem;"></div>
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
@@ -109,126 +118,153 @@
   <!-- 班級資料內容 -->
   <div class="container">
     <div class="row">
-        <h3 id="room" class="text-info"></h3>
-          <table id="list" class="card-deck">
-            <div class="card"></div>
-          </table>
+      <h3 id="room" class="text-info"></h3>
+      <table id="list" class="card-deck">
+        <div class="card"></div>
+      </table>
     </div>
   </div>
   <!-- ---------------------------------------------------------------------------------- -->
-    
-  
+  <!-- 置入JQ & JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+    integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+    crossorigin="anonymous"></script>
+
 </body>
+
 </html>
 <script>
-/************************************
-* 1.考慮觸發行為的事件
-* 2.建立監聽行為
-* 3.考慮是否需要代入參數
-* 4.是否會有回傳值？回傳值的功用及處理？
-* 5.是否需要更新畫面內容？更新畫面的方法？
-************************************/
-query(101);
-
-//新增資料的函式
-function create(){
-  let form={
-    "classroom":$("#classroom").val(),
-    "seatnum":$("#seatnum").val(),
-    "name":$("#name").val(),
-    "birthday":$("#birthday").val()
+  /************************************
+  * 1.考慮觸發行為的事件
+  * 2.建立監聽行為
+  * 3.考慮是否需要代入參數
+  * 4.是否會有回傳值？回傳值的功用及處理？
+  * 5.是否需要更新畫面內容？更新畫面的方法？
+  ************************************/
+  query(101);
+/*--------------------------------------------------------------------------*/ 
+  function loadForm(type) {
+    $("#studentForm").load("./form/student_form.php", { type });
   }
-  // console.log(form);
-  $.post("./api/insert.php",form,(res)=>{
-    if(parseInt(res)===1){
-      alert('新增成功')
-
-      $("#classroom").val(""),
-      $("#seatnum").val(""),
-      $("#name").val(""),
-      $("#birthday").val("")
-
-      query(form.classroom)
-    }else{
-      alert('新增失敗')
+/*--------------------------------------------------------------------------*/
+  //新增資料的函式
+  function create() {
+    let form = {
+      "classroom": $("#classroom").val(),
+      "seatnum": $("#seatnum").val(),
+      "name": $("#name").val(),
+      "birthday": $("#birthday").val()
     }
-    console.log(res);
-  })
-}
+    // console.log(form);
+    $.post("./api/insert.php", form, (res) => {
+      if (parseInt(res) === 1) {
+        alert('新增成功')
 
-//查詢資料的函式
-function query(classroom){
-  $("#room").html(`現在顯示的是${classroom}班級的學生`)
-  $.get("api/query.php",{classroom},(students)=>{
-    students=JSON.parse(students)
+        $("#classroom").val(""),
+          $("#seatnum").val(""),
+          $("#name").val(""),
+          $("#birthday").val("")
 
-    let tr="";
-    // console.log(students)
-    students.forEach((val,idx)=>{
-      // console.log(idx,val)
-      tr=tr+
-      `<tr class="card-body">
+        query(form.classroom)
+      } else {
+        alert('新增失敗')
+      }
+      console.log(res);
+    })
+  }
+/*--------------------------------------------------------------------------*/
+  //查詢資料的函式
+  function query(classroom) {
+    $("#room").html(`現在顯示的是${classroom}班級的學生`)
+    $.get("api/query.php", { classroom }, (students) => {
+      students = JSON.parse(students)
+
+      let tr = "";
+      // console.log(students)
+      students.forEach((val, idx) => {
+        // console.log(idx,val)
+        tr = tr +
+          `<tr class="card-body">
         <td class="text-muted">${val.name}</td>
         <td class="text-secondary">${val.birthday}</td>
-        <td><button class="btn btn-warning" onclick='edit(${val.id})'>編輯(${val.id})</button></td>
+        <td><button class="btn btn-success" onclick='edit(${val.id})'>編輯(${val.id})</button></td>
         <td><button class="btn btn-danger" onclick='del(${classroom},${val.id})'>刪除(${val.id})</button></td>
       </tr>`
-      ;
+          ;
+      })
+      $("#list").html(tr);
     })
-    $("#list").html(tr);
-  })
-}
-
-// 取得要修改的學生資料
-function edit(id){
-  $.get("./api/show.php",{id},(student)=>{
-    student=JSON.parse(student)
-    $("#eClassroom").val(student.classroom)
-    $("#eSeatnum").val(student.seat_num)
-    $("#eName").val(student.name)
-    $("#eBirthday").val(student.birthday)
-    $("#stuId").val(student.id)
-  })
-}
-//編輯資料的函式
-function update(){
-  let form={
-    "classroom":$("#eClassroom").val(),
-    "seatnum":$("#eSeatnum").val(),
-    "name":$("#eName").val(),
-    "birthday":$("#eBirthday").val(),
-    "id":$("#stuId").val()
   }
-  console.log(form)
-  $.post("./api/update.php",form,()=>{
-    $("#eClassroom").val(""),
-    $("#eSeatnum").val(""),
-    $("#eName").val(""),
-    $("#eBirthday").val(""),
-    $("#stuId").val("")
+/*--------------------------------------------------------------------------*/
+  // 取得要修改的學生資料
+  function edit(id) {
+    // loadForm('edit');
 
-    query(form.classroom)
-  })
-}
+    //   $.get("./api/show.php",{id},(student)=>{
+    //     student=JSON.parse(student)
+    //     $("#classroom").val(student.classroom)
+    //     $("#seatnum").val(student.seat_num)
+    //     $("#name").val(student.name)
+    //     $("#birthday").val(student.birthday)
+    //     $("#stuId").val(student.id)
+    //   })
+    $("#studentForm").load("./form/student_form.php", { type: 'edit' }, () => {
+      $.get("./api/show.php", { id }, (student) => {
+        student = JSON.parse(student)
+        //console.log(student)
+        $("#classroom").val(student.classroom)
+        $("#seatnum").val(student.seat_num)
+        $("#name").val(student.name)
+        $("#birthday").val(student.birthday)
+        $("#stuId").val(student.id)
+      })
 
-//刪除資料的函式
-function del(classroom,id){
+    })
 
-$.post("./api/delete.php",{id},(res)=>{
-
-  if(parseInt(res)===1){
-    $("#result").css({color:'green',display:'block'}).text("刪除成功")
-  }else{
-    $("#result").css({color:'tomato',display:'block'}).text("刪除失敗")
   }
+  /*--------------------------------------------------------------------------*/
+  //編輯資料的函式
+  function update() {
+    let form = {
+      "classroom": $("#classroom").val(),
+      "seatnum": $("#seatnum").val(),
+      "name": $("#name").val(),
+      "birthday": $("#birthday").val(),
+      "id": $("#stuId").val()
+    }
+    // console.log(form)
+    $.post("./api/update.php", form, () => {
+      $("#classroom").val(""),
+        $("#seatnum").val(""),
+        $("#name").val(""),
+        $("#birthday").val(""),
+        $("#stuId").val("")
 
-  query(classroom);
+      query(form.classroom)
+    })
+  }
+/*--------------------------------------------------------------------------*/
+  //刪除資料的函式
+  function del(classroom, id) {
 
-  setTimeout(()=>{
-    $("#result").hide();
-  },3000);
-})
+    $.post("./api/delete.php", { id }, (res) => {
 
-}
+      if (parseInt(res) === 1) {
+        $("#result").css({ color: 'green', display: 'block' }).text("刪除成功")
+      } else {
+        $("#result").css({ color: 'tomato', display: 'block' }).text("刪除失敗")
+      }
 
+      query(classroom);
+
+      setTimeout(() => {
+        $("#result").hide();
+      }, 3000);
+    })
+
+  }
+/*--------------------------------------------------------------------------*/
 </script>
